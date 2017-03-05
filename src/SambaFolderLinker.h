@@ -9,14 +9,17 @@
 class SambaFolderLinker
 {
 public :
-	int connecting(LPNETRESOURCE netResource, LPCTSTR password, LPCTSTR userName);
-	int disconnecting(LPCTSTR lpName, DWORD dwflags, BOOL ifForce);
+	int Connect(std::string serverName, std::string domainName, std::string userName, std::string password, std::string oneCharDiskName);
+	int Disconnect(std::string driverLetter, DWORD dwFlags, BOOL ifForce);
 
 	void setNetResource(LPSTR localName, LPSTR remoteName);
 	NETRESOURCE getNetResource();
+	void setDWFlags(DWORD dwFlags);
+	DWORD getDWFlags();
 
 private:
 	NETRESOURCE nr; 
-	DWORD connectTemporary = CONNECT_TEMPORARY;
+	DWORD DWFlags = CONNECT_TEMPORARY;
+	
 };
  
