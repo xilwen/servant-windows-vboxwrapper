@@ -13,9 +13,14 @@ public:
     ~Messenger();
     void send(std::wstring wstring) const;
     std::wstring receive();
+    int getIdleTime();
 private:
     asio::error_code lastError;
     tcp::socket* socket;
     Server* server;
+    bool doTimeRunner = true;
+    int idleTime = -1;
+    void resetIdleTimer();
+    void timerRunner();
 };
 

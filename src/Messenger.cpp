@@ -4,10 +4,12 @@
 
 Messenger::Messenger(tcp::socket* socket) :socket(socket), server(server)
 {
+    std::thread(&Messenger::timerRunner, this).detach();
 }
 
 Messenger::~Messenger()
 {
+    doTimeRunner = false;
 }
 
 void Messenger::send(std::wstring wstring) const
@@ -28,6 +30,8 @@ std::wstring Messenger::receive()
     {
         throw std::runtime_error("Receive command failed because there is no socket.");
     }
+    resetIdleTimer();
+
     std::vector<wchar_t> buf;
     std::wstringstream wstringstream;
     buf.resize(2048);
@@ -43,4 +47,23 @@ std::wstring Messenger::receive()
     Logger::log("Messenger", __func__, InfoLevel::DEBUG, std::string(returningWstring.begin(), returningWstring.end()));
 #endif //ifdef _DEBUG
     return returningWstring;
+}
+
+int Messenger::getIdleTime()
+{
+    return idleTime;
+}
+
+void Messenger::resetIdleTimer()
+{
+    idleTime = 0;
+}
+
+void Messenger::timerRunner()
+{
+    while (doTimeRunner)
+    {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        ++idleTime;
+    }
 }

@@ -202,6 +202,10 @@ std::wstring Interpreter::interpret()
     {
         return L"exit";
     }
+    if (cmd == L"keepAlive")
+    {
+        return L"keepAlive";
+    }
     return error(L"UnknownCommand");
 }
 
