@@ -16,8 +16,9 @@ public:
     std::wstring getVBoxVersion() const;
     VirtualMachine* getVMByNameOrUUID(std::wstring toSearch);
     static VBoxMainController* getExistController();
-    VBoxAppliance* appliance();
+    VBoxAppliance* appliance();    
     static void refreshCache();
+    IHost *getVirtualBoxIHost();
     ~VBoxMainController();
 private:
     static bool initialized;
@@ -36,7 +37,7 @@ private:
     void init();
     void createVBoxClientInstance();
     void createVBoxInstance();
-    std::wstring vBoxInstallDir;
+    std::wstring vBoxInstallDir; 
 
     void invalidateCache();
 };

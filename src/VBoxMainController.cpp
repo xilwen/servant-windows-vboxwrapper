@@ -121,6 +121,13 @@ void VBoxMainController::refreshCache()
     getExistController()->invalidateCache();
 }
 
+IHost *VBoxMainController::getVirtualBoxIHost()
+{
+    IHost *iHost = nullptr;
+    virtualBox->get_Host(&iHost);
+    return iHost;
+}
+
 void VBoxMainController::invalidateCache()
 {
     for (auto x : machinesCache)

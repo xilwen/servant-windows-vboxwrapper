@@ -16,7 +16,4 @@ public:
     static std::wstring getVMXSupport();
 private:
     std::wstring homePath;
-    class InstructionSet_Internal;
 };
-
-
