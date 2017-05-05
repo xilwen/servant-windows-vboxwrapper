@@ -15,6 +15,7 @@ Interpreter::~Interpreter()
 
 std::wstring Interpreter::search()
 {
+	//TODO FIX Space Problem
     auto toSearch(popInterpretQueue());
     vmSelected = vbmc->getVMByNameOrUUID(toSearch);
     if (!vmSelected)

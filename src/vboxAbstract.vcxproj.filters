@@ -57,6 +57,9 @@
     <ClInclude Include="WindowsUtilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ServiceInstaller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VBoxMainController.cpp">
@@ -90,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WindowsUtilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceInstaller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
