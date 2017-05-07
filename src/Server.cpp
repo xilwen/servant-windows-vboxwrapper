@@ -1,6 +1,7 @@
 #include "Server.h"
 #include <string>
 #include "Logger.h"
+#include "VBoxWrapperService.h"
 
 void Server::init()
 {
@@ -51,6 +52,10 @@ void Server::waitForConnect()
     {
         Logger::log(typeid(*this).name(), __func__, InfoLevel::ERR, e.what());
     }
+	catch (...)
+	{
+		Logger::log(typeid(*this).name(), __func__, InfoLevel::ERR, "something went wrong");
+	}
     messenger = new Messenger(socket);
     Logger::log(typeid(*this).name(), __func__, InfoLevel::INFO, "Client connected.");
 }
@@ -87,7 +92,7 @@ void Server::runInterpreterDaemon()
             Logger::log(typeid(*this).name(), __func__, InfoLevel::ERR, "Exception catched. Killing server...");
             restart();
         }
-    } while (result != L"exit" && messenger->getIdleTime() < 10);
+    } while (result != L"exit" && messenger->getIdleTime() < 10 && !VBoxWrapperService::isStopping());
 }
 
 void Server::setInterpreter(Interpreter* interpreter)

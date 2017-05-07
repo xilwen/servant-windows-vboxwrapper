@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <sstream>
 
 enum InfoLevel //Message Output Level
 {
@@ -15,6 +16,7 @@ public:
 
 private:
     static bool locked;
+	static std::stringstream stringstream;
 };
 
 

@@ -62,7 +62,7 @@ void VBoxMainController::createVBoxInstance()
     lastResult = virtualBoxClient->get_VirtualBox(&virtualBox);
     if (!SUCCEEDED(lastResult))
     {
-        throw std::runtime_error("Can not create IVirtualbox instance.");
+        throw std::runtime_error("Can not create IVirtualbox instance." + std::to_string(static_cast<unsigned long>(lastResult)));
     }
 }
 

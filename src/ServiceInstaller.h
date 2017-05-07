@@ -9,6 +9,7 @@ public:
 	static unsigned long install();
 	static void stopService(SC_HANDLE service, SERVICE_STATUS serviceStatus);
 	static unsigned long remove();
+	static std::wstring getServiceName();
 private:
 	ServiceInstaller();
 	static unsigned long ServiceInstaller::cleanupAndReturn(SC_HANDLE& scManager, SC_HANDLE& service, std::string errorDescription, bool succeed);

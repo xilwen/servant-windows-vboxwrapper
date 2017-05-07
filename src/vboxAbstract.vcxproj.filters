@@ -60,6 +60,9 @@
     <ClInclude Include="ServiceInstaller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VBoxWrapperService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VBoxMainController.cpp">
@@ -96,6 +99,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ServiceInstaller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VBoxWrapperService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
