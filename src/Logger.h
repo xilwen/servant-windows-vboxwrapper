@@ -17,6 +17,10 @@ public:
 private:
     static bool locked;
 	static std::stringstream stringstream;
+	static std::string fileName;
+	static void findAndDelete(std::string& timeString, const std::string& toReplace);
+	static std::string getLogFileName();
+
 };
 
 

@@ -16,7 +16,7 @@ WindowsUtilities::~WindowsUtilities()
 {
 }
 
-std::wstring WindowsUtilities::getHomePath()
+std::wstring WindowsUtilities::getHomePathWstring()
 {
     auto homePathDataBuffer(LPWSTR(malloc(256 * sizeof(WCHAR)))),
         homeDriveDataBuffer(LPWSTR(malloc(256 * sizeof(WCHAR))));

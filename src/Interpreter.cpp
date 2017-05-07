@@ -81,7 +81,7 @@ std::wstring Interpreter::get()
     }
     if (cmd == L"userHomePath")
     {
-        return WindowsUtilities::getHomePath();
+        return WindowsUtilities::getHomePathWstring();
     }
     if(cmd == L"systemTotalRAM")
     {

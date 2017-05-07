@@ -8,7 +8,7 @@ class WindowsUtilities
 public:
     WindowsUtilities();
     ~WindowsUtilities();
-    static std::wstring getHomePath();
+    static std::wstring getHomePathWstring();
     static BSTR toBSTR(std::wstring in);
     static std::wstring toWstring(BSTR in);
     static std::wstring toWstring(std::string in);

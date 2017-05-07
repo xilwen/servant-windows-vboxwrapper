@@ -24,7 +24,5 @@ int main(int argc, char *argv[])
 			Logger::log("Main", __func__, InfoLevel::ERR, "cannot start service.");
 		}		
 	}
-	Logger::log("Main", __func__, InfoLevel::ERR, "Why You ARE HERE?!?!?!");
-
     exit(EXIT_SUCCESS);
 }

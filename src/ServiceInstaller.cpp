@@ -6,7 +6,7 @@
 
 std::wstring ServiceInstaller::serviceName(L"SERVANTVboxWrapper");
 std::wstring ServiceInstaller::displayName(L"SERVANT VirtualBox Wrapper");
-std::wstring ServiceInstaller::path(WindowsUtilities::getHomePath() + L"\\SERVANT\\vBoxWrapper.exe");
+std::wstring ServiceInstaller::path(WindowsUtilities::getHomePathWstring() + L"\\SERVANT\\vBoxWrapper.exe");
 //std::wstring ServiceInstaller::path(L"D:\\Project\\SERVANT\\Git\\servant-windows-vboxwrapper\\src\\Debug\\vboxWrapper.exe");
 
 ServiceInstaller::ServiceInstaller()
