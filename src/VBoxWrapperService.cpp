@@ -149,11 +149,6 @@ void VBoxWrapperService::serviceWorkerThread()
 		Logger::log("VBoxWrapperService", __func__, InfoLevel::ERR, std::string("Something is out of control..."));
 	}
 
-	//while(!stopping)
-	//{
-	//	Logger::log("VBoxWrapperService", __func__, InfoLevel::ERR, "ALIVE");
-	//	::Sleep(50);
-	//}
 	SetEvent(stoppedEvent);
 }
 

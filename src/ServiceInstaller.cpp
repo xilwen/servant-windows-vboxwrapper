@@ -7,7 +7,6 @@
 std::wstring ServiceInstaller::serviceName(L"SERVANTVboxWrapper");
 std::wstring ServiceInstaller::displayName(L"SERVANT VirtualBox Wrapper");
 std::wstring ServiceInstaller::path(WindowsUtilities::getHomePathWstring() + L"\\SERVANT\\vBoxWrapper.exe");
-//std::wstring ServiceInstaller::path(L"D:\\Project\\SERVANT\\Git\\servant-windows-vboxwrapper\\src\\Debug\\vboxWrapper.exe");
 
 ServiceInstaller::ServiceInstaller()
 {
@@ -59,7 +58,7 @@ unsigned long ServiceInstaller::install()
 	}
 
 	service = CreateServiceW(scManager, serviceName.c_str(), displayName.c_str(),
-		SERVICE_QUERY_STATUS | WRITE_DAC, SERVICE_WIN32_OWN_PROCESS, SERVICE_DEMAND_START,
+		SERVICE_QUERY_STATUS | WRITE_DAC, SERVICE_WIN32_OWN_PROCESS, SERVICE_AUTO_START,
 		SERVICE_ERROR_NORMAL, path.c_str(), nullptr, nullptr, L"",
 		L"LocalSystem", nullptr);
 	if (!service)

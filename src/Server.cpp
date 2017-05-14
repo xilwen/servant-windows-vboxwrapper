@@ -120,18 +120,57 @@ void Server::restart()
 
 void Server::uninit()
 {
-    if (io_service)
-        delete io_service;
-    if (acceptor)
-        delete acceptor;
+	if (messenger)
+	{
+		delete messenger;
+		messenger = nullptr;
+	}
+	if (acceptor)
+	{
+		Logger::log(typeid(*this).name(), __func__, InfoLevel::WARNING, "acceptor closing");
+		try
+		{
+			acceptor->close();
+		}
+		catch(std::exception &e)
+		{
+			Logger::log(typeid(*this).name(), __func__, InfoLevel::ERR, std::string("acceptor closing failed with ") + e.what());
+		}
+		catch(...)
+		{
+			Logger::log(typeid(*this).name(), __func__, InfoLevel::ERR, "acceptor closing failed, unknown reason");
+		}
+		Logger::log(typeid(*this).name(), __func__, InfoLevel::WARNING, "acceptor closed");
+		delete acceptor;
+		acceptor = nullptr;
+	}
     if (socket)
     {
-        socket->shutdown(asio::ip::tcp::socket::shutdown_both, lastError);
-        socket->close();
+		Logger::log(typeid(*this).name(), __func__, InfoLevel::WARNING, "socket shutting down");
+		try
+		{
+			socket->shutdown(asio::ip::tcp::socket::shutdown_both, lastError);
+			socket->close();
+		}
+		catch (std::exception &e)
+		{
+			Logger::log(typeid(*this).name(), __func__, InfoLevel::ERR, std::string("socket closing failed with ") + e.what());
+		}
+		catch (...)
+		{
+			Logger::log(typeid(*this).name(), __func__, InfoLevel::ERR, "socket closing failed, unknown reason");
+		}
+		Logger::log(typeid(*this).name(), __func__, InfoLevel::WARNING, "socket closed");
         delete socket;
+		socket = nullptr;
     }
-    if (messenger)
-        delete messenger;
+    
+	if (io_service)
+	{
+		io_service->stop();
+		delete io_service;
+		io_service = nullptr;
+	}
     Logger::log(typeid(*this).name(), __func__, InfoLevel::INFO, "Server has been turned off.");
 }
 
