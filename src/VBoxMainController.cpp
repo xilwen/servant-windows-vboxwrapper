@@ -130,6 +130,7 @@ IHost *VBoxMainController::getVirtualBoxIHost()
 
 void VBoxMainController::invalidateCache()
 {
+	Logger::log("VBoxMainController", __func__, InfoLevel::INFO, "cache invalidation started");
     for (auto x : machinesCache)
     {
         if (x)
@@ -138,6 +139,7 @@ void VBoxMainController::invalidateCache()
         }
     }
     machinesCache.clear();
+	Logger::log("VBoxMainController", __func__, InfoLevel::INFO, "cache invalidation ended");
 }
 
 VBoxMainController::~VBoxMainController()

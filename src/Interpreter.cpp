@@ -15,7 +15,6 @@ Interpreter::~Interpreter()
 
 std::wstring Interpreter::search()
 {
-	//TODO FIX Space Problem
     auto toSearch(popInterpretQueue());
     vmSelected = vbmc->getVMByNameOrUUID(toSearch);
     if (!vmSelected)
@@ -79,6 +78,11 @@ std::wstring Interpreter::get()
         }
         return L"false";
     }
+	if (cmd == L"ipconfigAndSave")
+	{
+		WindowsUtilities::ipconfigAndSave();
+		return L"done";
+	}
     if (cmd == L"userHomePath")
     {
         return WindowsUtilities::getHomePathWstring();
@@ -165,6 +169,7 @@ std::wstring Interpreter::del()
     {
         return error(WindowsUtilities::toWstring(e.what()));
     }
+	VBoxMainController::refreshCache();
     return L"SUCCEED";
 }
 
