@@ -92,7 +92,7 @@ void Server::runInterpreterDaemon()
             Logger::log(typeid(*this).name(), __func__, InfoLevel::ERR, "Exception catched. Killing server...");
             restart();
         }
-    } while (result != L"exit" && messenger->getIdleTime() < 10 && !VBoxWrapperService::isStopping());
+    } while (result != L"exit" && !VBoxWrapperService::isStopping());
 }
 
 void Server::setInterpreter(Interpreter* interpreter)

@@ -4,6 +4,7 @@
 #include <thread>
 #include <chrono>
 #include "WindowsUtilities.h"
+#include <filesystem>
 
 bool Logger::locked(false);
 std::stringstream Logger::stringstream;
@@ -38,6 +39,11 @@ std::string Logger::getLogFileName()
 		findAndDelete(timeString, " ");
 		findAndDelete(timeString, ":");
 		findAndDelete(timeString, "\n");
+
+		if(!std::experimental::filesystem::exists("C:\\SERVANT"))
+		{
+			std::experimental::filesystem::create_directory("C:\\SERVANT");
+		}
 
 		fileName = "C:\\SERVANT\\Wrapper" + timeString + ".log";
 	}

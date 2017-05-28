@@ -144,6 +144,10 @@ void VirtualMachine::powerDown()
     {
         throw std::runtime_error("VM did not powered on, request rejected.");
     }
+	if (!console || !session)
+	{
+		throw std::runtime_error("We do not have the handle of iconsole/isession");
+	}
     console->PowerDown(&progress);
     progress->WaitForCompletion(-1);
     session->UnlockMachine();
@@ -156,6 +160,10 @@ void VirtualMachine::powerButton()
         throw std::runtime_error("VM did not powered on, request rejected.");
     }
     //TODO incomplete function only for demo
+	if (!console || !session)
+	{
+		throw std::runtime_error("We do not have the handle of iconsole/isession");
+	}
     console->PowerButton();
     session->UnlockMachine();
 }
