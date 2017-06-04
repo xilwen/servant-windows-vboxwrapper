@@ -78,6 +78,11 @@ std::wstring VBoxMainController::getVBoxVersion() const
     return std::wstring(version, SysStringLen(version));
 }
 
+std::wstring VBoxMainController::getVBoxManagePath()
+{
+	return (vBoxInstallDir + L"\\vboxmanage.exe");
+}
+
 VirtualMachine * VBoxMainController::getVMByNameOrUUID(std::wstring toSearch)
 {
     //TODO cacher and cache invalidator

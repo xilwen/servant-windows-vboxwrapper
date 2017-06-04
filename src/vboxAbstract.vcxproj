@@ -125,6 +125,7 @@
     <ClInclude Include="Interpreter.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Messenger.h" />
+    <ClInclude Include="ProgramHolder.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="ServiceInstaller.h" />
     <ClInclude Include="VBoxAppliance.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Messenger.cpp" />
+    <ClCompile Include="ProgramHolder.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="ServiceInstaller.cpp" />
     <ClCompile Include="VBoxAppliance.cpp" />

@@ -50,6 +50,13 @@ std::string Logger::getLogFileName()
 	return fileName;
 }
 
+std::string Logger::toString(std::wstring in)
+{
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	auto string(converter.to_bytes(in));
+	return string;
+}
+
 void Logger::log(std::string className, std::string func, InfoLevel level, std::string message)
 {
 	while (locked)
@@ -87,4 +94,9 @@ void Logger::log(std::string className, std::string func, InfoLevel level, std::
 		ofstream.close();
 	}
 	locked = false;
+}
+
+void Logger::log(std::string className, std::string func, InfoLevel level, std::wstring wstring)
+{
+	log(className, func, level, toString(wstring));
 }

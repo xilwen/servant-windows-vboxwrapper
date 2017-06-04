@@ -19,8 +19,8 @@ public:
     void showScreenInVBoxUI() const;
 	void setCPUCount(unsigned int cpuCount);
 	void setRAMSize(unsigned int ramSize);
-	void addNATPortForwardingRule(unsigned int portOfGuest, unsigned int portOfHost);
-	void removeNATPortForwardingRule(unsigned int portOfGuest);
+	void addNATPortForwardingRuleOffline(unsigned int portOfGuest, unsigned int portOfHost);
+	void removeNATPortForwardingRuleOffline(unsigned int portOfGuest);
     std::wstring getMachineStatus() const;
     ~VirtualMachine();
 private:

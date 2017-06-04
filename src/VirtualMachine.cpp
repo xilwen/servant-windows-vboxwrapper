@@ -1,5 +1,6 @@
 #include "VirtualMachine.h"
 #include "WindowsUtilities.h"
+#include "ProgramHolder.h"
 //TODO Refactor to use SysFreeString(BSTR);
 
 VirtualMachine::VirtualMachine(IMachine *machine)
@@ -235,50 +236,38 @@ void VirtualMachine::setRAMSize(unsigned int ramSize)
 	}
 }
 
-void VirtualMachine::addNATPortForwardingRule(unsigned portOfGuest, unsigned portOfHost)
+void VirtualMachine::addNATPortForwardingRuleOffline(unsigned int portOfGuest, unsigned int portOfHost)
 {
-	//INetworkAdapter *networkAdapter = nullptr;
-	//lastResult = machine->GetNetworkAdapter(0, &networkAdapter);
-	//if (!networkAdapter)
-	//{
-	//	//TODO fail
-	//	return;
-	//}
-	//INATEngine *natEngine = nullptr;
-	//lastResult = networkAdapter->get_NATEngine(&natEngine);
-	//if (!natEngine)
-	//{
-	//	//TODO fail
-	//	return;
-	//}
-	//BSTR newRuleName(WindowsUtilities::toBSTR(std::to_wstring(portOfGuest)));
-	//BSTR hostIP(WindowsUtilities::toBSTR(L""));
-	//BSTR guestIP(WindowsUtilities::toBSTR(L""));
-	//lastResult = natEngine->AddRedirect(newRuleName, NATProtocol_TCP,
-	//	hostIP, static_cast<USHORT>(portOfHost),
-	//	guestIP, static_cast<USHORT>(portOfGuest));
+	auto *programHolder = new ProgramHolder;
+	std::wstring cmdLine;
+	cmdLine += (VBoxMainController::getInstance()->getVBoxManagePath() +
+		L" modifyvm " + getUuid() + L" --natpf1 \"" +
+		std::to_wstring(portOfGuest) + L",tcp,," + std::to_wstring(portOfGuest) +
+		L",," + std::to_wstring(portOfHost) + L"\"");
+	programHolder->setCmdLine(cmdLine);
+	programHolder->run();
+	while (programHolder->isRunning())
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
+	delete programHolder;
 }
 
-void VirtualMachine::removeNATPortForwardingRule(unsigned portOfGuest)
+void VirtualMachine::removeNATPortForwardingRuleOffline(unsigned int portOfGuest)
 {
-	//INetworkAdapter *networkAdapter = nullptr;
-	//lastResult = machine->GetNetworkAdapter(0, &networkAdapter);
-	//if (!networkAdapter)
-	//{
-	//	//TODO fail
-	//	return;
-	//}
-	//INATEngine *natEngine = nullptr;
-	//lastResult = networkAdapter->get_NATEngine(&natEngine);
-	//if (!natEngine)
-	//{
-	//	//TODO fail
-	//	return;
-	//}
-	//BSTR ruleName(WindowsUtilities::toBSTR(std::to_wstring(portOfGuest)));
-	//lastResult = natEngine->RemoveRedirect(ruleName);
+	auto *programHolder = new ProgramHolder;
+	std::wstring cmdLine;
+	cmdLine += (VBoxMainController::getInstance()->getVBoxManagePath() +
+		L" modifyvm " + getUuid() + L" --natpf1 delete \"" + std::to_wstring(portOfGuest) +
+		L"\"");
+	programHolder->setCmdLine(cmdLine);
+	programHolder->run();
+	while (programHolder->isRunning())
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
+	delete programHolder;
 }
-
 
 VirtualMachine::~VirtualMachine()
 {

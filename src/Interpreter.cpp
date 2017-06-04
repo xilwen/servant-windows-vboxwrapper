@@ -190,7 +190,7 @@ std::wstring Interpreter::set()
 		auto hostPort(std::stoi(popInterpretQueue()));
 		try
 		{
-			vmSelected->addNATPortForwardingRule(static_cast<unsigned int>(guestPort), static_cast<unsigned int>(hostPort));
+			vmSelected->addNATPortForwardingRuleOffline(static_cast<unsigned int>(guestPort), static_cast<unsigned int>(hostPort));
 		}
 		catch (...)
 		{
@@ -204,7 +204,7 @@ std::wstring Interpreter::set()
 		auto guestPort(std::stoi(popInterpretQueue()));
 		try
 		{
-			vmSelected->removeNATPortForwardingRule(static_cast<unsigned int>(guestPort));
+			vmSelected->removeNATPortForwardingRuleOffline(static_cast<unsigned int>(guestPort));
 		}
 		catch(...)
 		{
