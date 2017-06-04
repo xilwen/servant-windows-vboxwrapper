@@ -58,8 +58,6 @@ std::wstring VBoxAppliance::getNewVMName()
     return suggestedName;
 }
 
-
-
 VBoxAppliance::~VBoxAppliance()
 {
 }

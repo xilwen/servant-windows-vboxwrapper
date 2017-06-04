@@ -54,7 +54,7 @@ std::wstring WindowsUtilities::getRAMSize()
 
 std::wstring WindowsUtilities::getVMXSupport()
 {
-	auto iHost = VBoxMainController::getExistController()->getVirtualBoxIHost();
+	auto iHost = VBoxMainController::getInstance()->getVirtualBoxIHost();
 	int supported;
 	iHost->GetProcessorFeature(ProcessorFeature_HWVirtEx, &supported);
 	if (supported == TRUE)

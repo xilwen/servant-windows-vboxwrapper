@@ -15,7 +15,7 @@ public:
     static bool exist();
     std::wstring getVBoxVersion() const;
     VirtualMachine* getVMByNameOrUUID(std::wstring toSearch);
-    static VBoxMainController* getExistController();
+    static VBoxMainController* getInstance();
     VBoxAppliance* appliance();    
     static void refreshCache();
     IHost *getVirtualBoxIHost();

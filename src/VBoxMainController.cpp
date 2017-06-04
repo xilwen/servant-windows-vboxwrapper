@@ -106,7 +106,7 @@ VirtualMachine * VBoxMainController::getVMByNameOrUUID(std::wstring toSearch)
 }
 
 
-VBoxMainController * VBoxMainController::getExistController()
+VBoxMainController * VBoxMainController::getInstance()
 {
     return activeInstance;
 }
@@ -118,7 +118,7 @@ VBoxAppliance* VBoxMainController::appliance()
 
 void VBoxMainController::refreshCache()
 {
-    getExistController()->invalidateCache();
+    getInstance()->invalidateCache();
 }
 
 IHost *VBoxMainController::getVirtualBoxIHost()

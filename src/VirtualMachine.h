@@ -17,10 +17,15 @@ public:
     void powerDown();
     void powerButton();
     void showScreenInVBoxUI() const;
+	void setCPUCount(unsigned int cpuCount);
+	void setRAMSize(unsigned int ramSize);
+	void addNATPortForwardingRule(unsigned int portOfGuest, unsigned int portOfHost);
+	void removeNATPortForwardingRule(unsigned int portOfGuest);
     std::wstring getMachineStatus() const;
     ~VirtualMachine();
 private:
     IMachine *machine;
+	IMachine *mutableMachine = nullptr;
     ISession *session = nullptr;
     IConsole *console = nullptr;
     IProgress *progress = nullptr;
