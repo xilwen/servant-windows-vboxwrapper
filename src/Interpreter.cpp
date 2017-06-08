@@ -40,6 +40,11 @@ std::wstring Interpreter::control()
 		vmSelected->powerButton();
 		return L"SUCCEED";
 	}
+	if (cmd == L"output")
+	{
+		vmSelected->exportOVA(popInterpretQueue());
+		return L"SUCCEED";
+	}
 	return error(L"UnknownCommand");
 }
 
@@ -95,6 +100,10 @@ std::wstring Interpreter::get()
 	if (cmd == L"vmxSupport")
 	{
 		return WindowsUtilities::getVMXSupport();
+	}
+	if (cmd == L"processorCount")
+	{
+		return WindowsUtilities::getCPUCount();
 	}
 	if (vmSelected)
 	{
@@ -190,7 +199,14 @@ std::wstring Interpreter::set()
 		auto hostPort(std::stoi(popInterpretQueue()));
 		try
 		{
-			vmSelected->addNATPortForwardingRuleOffline(static_cast<unsigned int>(guestPort), static_cast<unsigned int>(hostPort));
+			if (vmSelected->getMachineStatus() == L"Running")
+			{
+				vmSelected->addNATPortForwardingRuleOnline(static_cast<unsigned int>(guestPort), static_cast<unsigned int>(hostPort));
+			}
+			else
+			{
+				vmSelected->addNATPortForwardingRuleOffline(static_cast<unsigned int>(guestPort), static_cast<unsigned int>(hostPort));
+			}
 		}
 		catch (...)
 		{
@@ -204,7 +220,14 @@ std::wstring Interpreter::set()
 		auto guestPort(std::stoi(popInterpretQueue()));
 		try
 		{
-			vmSelected->removeNATPortForwardingRuleOffline(static_cast<unsigned int>(guestPort));
+			if(vmSelected->getMachineStatus() == L"Running")
+			{
+				vmSelected->removeNATPortForwardingRuleOnline(static_cast<unsigned int>(guestPort));
+			}
+			else
+			{
+				vmSelected->removeNATPortForwardingRuleOffline(static_cast<unsigned int>(guestPort));
+			}
 		}
 		catch(...)
 		{

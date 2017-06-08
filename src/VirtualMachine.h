@@ -21,6 +21,9 @@ public:
 	void setRAMSize(unsigned int ramSize);
 	void addNATPortForwardingRuleOffline(unsigned int portOfGuest, unsigned int portOfHost);
 	void removeNATPortForwardingRuleOffline(unsigned int portOfGuest);
+	void addNATPortForwardingRuleOnline(unsigned int portOfGuest, unsigned int portOfHost);
+	void removeNATPortForwardingRuleOnline(unsigned int portOfGuest);
+	void exportOVA(std::wstring path);
     std::wstring getMachineStatus() const;
     ~VirtualMachine();
 private:

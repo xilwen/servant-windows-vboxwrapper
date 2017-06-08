@@ -8,6 +8,7 @@ public:
     VBoxAppliance() = delete;
     explicit VBoxAppliance(const std::wstring& vBoxInstallDir);
     void import(const std::wstring& path);
+	void exportOVA(std::wstring uuid, std::wstring path);
     static bool isBusy();
     static int getProgress();
     static bool isSucceeded();
@@ -22,6 +23,7 @@ private:
     static int progress;
     static bool succeeded;
     static bool busy;
+	static bool exporting;
     static std::wstring suggestedName;
     std::wstring outputString;
     void childOutputHandler();

@@ -64,6 +64,14 @@ std::wstring WindowsUtilities::getVMXSupport()
 	return L"false";
 }
 
+std::wstring WindowsUtilities::getCPUCount()
+{
+	auto iHost = VBoxMainController::getInstance()->getVirtualBoxIHost();
+	unsigned long cpuCount;
+	iHost->get_ProcessorCoreCount(&cpuCount);
+	return std::to_wstring(cpuCount);
+}
+
 void WindowsUtilities::ipconfigAndSave()
 {
 	system("ipconfig > C:\\SERVANT\\ipconfig.txt");

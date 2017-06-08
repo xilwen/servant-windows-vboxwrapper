@@ -113,6 +113,7 @@ void ProgramHolder::stdOutPipeRunner()
 		}
 	}
 	running = false;
+	Logger::log(className, __func__, InfoLevel::INFO, stdOut);
 	Logger::log(className, __func__, InfoLevel::INFO, "Process Ended. Return Code = " + std::to_string(exitCode));
 }
 

@@ -269,6 +269,44 @@ void VirtualMachine::removeNATPortForwardingRuleOffline(unsigned int portOfGuest
 	delete programHolder;
 }
 
+void VirtualMachine::addNATPortForwardingRuleOnline(unsigned int portOfGuest, unsigned int portOfHost)
+{
+	auto *programHolder = new ProgramHolder;
+	std::wstring cmdLine;
+	cmdLine += (VBoxMainController::getInstance()->getVBoxManagePath() +
+		L" controlvm " + getUuid() + L" natpf1 \"" +
+		std::to_wstring(portOfGuest) + L",tcp,," + std::to_wstring(portOfGuest) +
+		L",," + std::to_wstring(portOfHost) + L"\"");
+	programHolder->setCmdLine(cmdLine);
+	programHolder->run();
+	while (programHolder->isRunning())
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
+	delete programHolder;
+}
+
+void VirtualMachine::removeNATPortForwardingRuleOnline(unsigned int portOfGuest)
+{
+	auto *programHolder = new ProgramHolder;
+	std::wstring cmdLine;
+	cmdLine += (VBoxMainController::getInstance()->getVBoxManagePath() +
+		L" controlvm " + getUuid() + L" natpf1 delete \"" + std::to_wstring(portOfGuest) +
+		L"\"");
+	programHolder->setCmdLine(cmdLine);
+	programHolder->run();
+	while (programHolder->isRunning())
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
+	delete programHolder;
+}
+
+void VirtualMachine::exportOVA(std::wstring path)
+{
+	VBoxMainController::getInstance()->appliance()->exportOVA(getUuid(), path);
+}
+
 VirtualMachine::~VirtualMachine()
 {
 	if (session)
