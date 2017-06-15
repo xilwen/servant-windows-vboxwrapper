@@ -14,6 +14,10 @@ Since g++ can not use MSCOM properly, this wrapper use localhost socket to conne
   VirtualBox_i.c
 * Put Virtualbox.h in ./src/include
 
+## Install & Run
+* Use "-install" parameter to install service into Windows,  
+  "-remove" to uninstall the service from Windows.
+* Start "SERVANT VirtualBox Wrapper" from Windows Service Control Manager.
+
 ## Note
 * This wrapper is Windows-dependent.  
-* This project is still under heavy development.  
